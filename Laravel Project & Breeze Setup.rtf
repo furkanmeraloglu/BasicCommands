@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 HelveticaNeue;
+\f3\fnil\fcharset0 AndaleMono;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red71\green138\blue206;
+\red203\green203\blue202;\red194\green125\blue100;\red202\green202\blue202;\red142\green214\blue255;\red203\green203\blue202;
+\red167\green197\blue151;\red212\green214\blue214;}
+{\*\expandedcolortbl;;\cssrgb\c0\c1\c1;\cssrgb\c100000\c100000\c99985\c0;\cssrgb\c34146\c61677\c84338;
+\cssrgb\c83320\c83320\c83112;\cssrgb\c80772\c56796\c46790;\cssrgb\c83137\c83137\c83137;\cssrgb\c61912\c87133\c100000;\cssrgb\c83502\c83501\c83084;
+\cssrgb\c71087\c80874\c65568;\cssrgb\c86470\c86863\c87040;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+1 - 			Homestead\'92de sanal makine \'fczerinden \
+\
+			laravel new blog\
+\
+			komutunu \'e7al\uc0\u305 \u351 t\u305 r\u305 yoruz. Burada \'91blog\'92 kuraca\u287 \u305 m\u305 z laravel projesinin ismi oluyor. \
+\
+\
+2 - 			\uc0\u304 kinci ad\u305 m olarak kurdu\u287 umuz bu laravel projesiyle birlikte \'e7al\u305 \u351 acak bir veritaban\u305 na i			htiyac\u305 m\u305 z var. Ayr\u305 ca bu projeye hem yerel makinam\u305 zdan sanal makinam\u305 za i\u351 aret edecek 			bir y\'f6nergeye ve ayn\u305  \u351 ekilde yerel makinam\u305 zda sanal makinam\u305 z\u305 n IP\'92sini 			kullanabilece\u287 imiz bir ayara ihtiyac\u305 m\u305 z var. Proje kurulumunu yapt\u305 ktan sonra yerel 			makinam\u305 zdan homestead.yaml dosyas\u305 na giriyoruz. \
+\
+			Yaml. Dosyas\uc0\u305 nda \'f6ncelikle i\u351 lem yapaca\u287 \u305 m\u305 z k\u305 s\u305 mlar folder ve sites k\u305 s\u305 mlar\u305 . Folder 			k\u305 sm\u305 nda bizim projeyi kurdu\u287 umuz directory\'92miz g\'f6steriliyor. Bu directory\'92de yer alan 			projemizi sanal makinam\u305 zdan ula\u351 abilece\u287 imiz ve browser \'fczerinden 			g\'f6r\'fcnt\'fcleyebilece\u287 imiz bir sites belirtmemiz gerekiyor. \'d6rnek olarak kurdu\u287 umuz laravel 			projesinin isminin \'91blog\'92 oldu\u287 unu d\'fc\u351 \'fcnelim. Bu do\u287 rultuda homestead.yaml dosyas\u305 nda 			a\u351 a\u287 \u305 daki gibi de\u287 i\u351 iklikleri yap\u305 yoruz: \
+\
+			
+\f1 \cf2 \cb3 \expnd0\expndtw0\kerning0
+folders:\
+\pard\pardeftab720\sl520\partightenfactor0
+\cf2     			- map: ~/code\
+      		to: /home/vagrant/code\
+		  sites:\
+    			- map: homestead.test\
+    			to: /home/vagrant/code/\
+    			- map: example.test\
+      		to: /home/vagrant/code/example-app/public\
+    			- map: blog.test\
+      		to: /home/vagrant/code/blog/public\cf7 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \
+			Yukar\uc0\u305 da g\'f6r\'fcld\'fc\u287 \'fc gibi yerel makinemizde projemiz ~/code dosyas\u305  i\'e7indeyken sanal 			makinemizde projemiz /home/vagrant/code i\'e7erisinde yer al\u305 yor. Bu projemiz blog.test 			ba\u287 lant\u305 s\u305 n\u305  kullanarak sanal makinemizden /home/vagrant/code/blog/public \'fczerinden i\u351 lem 			yap\u305 yor. Ayr\u305 ca istersek halihaz\u305 rda yaml. Dosyas\u305  \'fczerinde tan\u305 mlanan veritabanlar\u305 n\u305  			kullanmak istemiyorsak, yeni bir veritaban\u305 n\u305  burada tan\u305 mlayabiliyoruz. Onun i\'e7in de; \
+\
+			databases: \
+				- homestead\
+				- blog\
+\
+			\uc0\u351 eklinde g\'f6sterilen veritabanlar\u305 na yenisini eklememiz yeterli. Bu i\u351 lemleri yapt\u305 ktan sonra 			yaml. dosyas\u305 yla i\u351 imiz bitiyor. \
+\
+3 - 			Bilgisiyar\uc0\u305 m\u305 zdan homestead\'92in kullanaca\u287 \u305  ip adresine bir tan\u305 mlama yapmam\u305 z gerekiyor. Ba\u351 ka t\'fcrl\'fc o adrese sanal makine \'fczerinden eri\u351 im sa\u287 layamay\u305 z. \
+\
+				sudo vim /etc/hosts \
+			\
+			Bu komut vim edit\'f6r \'fczerinden bilgisiyar\uc0\u305 m\u305 z\u305 n host ayarlar\u305 na eri\u351 ip, terminal \'fczerinden 			de\u287 i\u351 iklik yapmam\u305 z\u305  sa\u287 l\u305 yor. Dosyay\u305  vim \'fczerinden a\'e7t\u305 ktan sonra kulland\u305 \u287 \u305 n\u305 z \'91site\'92 			ismine sanal makinemizin sahip oldu\u287 u ip adresini veriyoruz. \'d6rn: \
+\
+				192.168.10.10		homestead.test\
+\
+\
+4 - 			Unutulmamas\uc0\u305  gereken nokta \u351 u ki, her yaml dosyas\u305 nda de\u287 i\u351 iklik yapt\u305 ktan sonra sanal 			makinemiz \'fczerinden \'f6ncelikle vagrant reload \'97provision komutunu \'e7al\u305 \u351 t\u305 r\u305 yoruz. Tabii bu 			komutu \'e7al\u305 \u351 t\u305 rabilmek i\'e7in \'f6ncelikle vagrant ssh durumundan exit diyerek \'e7\u305 k\u305 p 			d\'f6nd\'fc\u287 \'fcm\'fcz homestead alan\u305 nda bu komutu \'e7al\u305 \u351 t\u305 rmam\u305 z gerekiyor. Bu komutu tekrar \'e7			al\u305 \u351 t\u305 rd\u305 ktan sonra vagrant ssh diyerek tekrar sanal makine aray\'fcz\'fcne terminal \'fczerinden 			girebiliriz. \
+\
+5 - 			Bu i\uc0\u351 lemleri yapt\u305 ktan sonra laravel projemizi text edit\'f6r\'fcm\'fczde a\'e7arak .env dosyas\u305 nda 			gerekli de\u287 i\u351 iklikleri yapmam\u305 z gerekiyor. Burada en \'e7ok dikkat etmemiz gereken nokta 			veritaban\u305  ayarlar\u305 n\u305  .env dosyas\u305  \'fczerinden d\'fczeltmek. Mysql kullanacak isek .env 			dosyas\u305 ndaki veritaban\u305  ayarlar\u305 n\u305  a\u351 a\u287 \u305 daki gibi yapmam\u305 z gerekiyor. \
+\
+\pard\pardeftab720\sl520\partightenfactor0
+
+\f1 \cf2 \cb3 \expnd0\expndtw0\kerning0
+			DB_CONNECTION=mysql\
+			DB_HOST=127.0.0.1\
+			DB_PORT=3306\
+			DB_DATABASE=blog		// yaml. Dosyas\uc0\u305 nda belirtti\u287 imiz 										veritaban\u305  ismi\
+			DB_USERNAME=homestead	// Homestead \'fczerinden ula\uc0\u351 \u305 yoruz\
+			DB_PASSWORD=secret
+\fs34 \cf7 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \kerning1\expnd0\expndtw0 \
+\
+6 - 			Sonraki i\uc0\u351 lemimiz ise ihtiyac\u305 m\u305 z olacak tema motorlar\u305 n\u305  projemiz \'fczerinden y\'fcklemek. 			Bunun i\'e7in yapaca\u287 \u305 m\u305 z t\'fcm i\u351 lemleri projemiz \'fczerinde i\u351 lem yapt\u305 \u287 \u305 m\u305 z sanal 			makinemizde ger\'e7ekle\u351 tiriyoruz. \
+\
+			
+\f2 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\'d6ncelikle laravel'in temel kullan\uc0\u305 c\u305  i\u351 lemleri ve tema altyap\u305 s\u305 n\u305  i\'e7erecek \u351 ekilde breeze 			paketini uygulamam\u305 za kuruyoruz\
+\
+				
+\f3 composer require laravel/breeze --dev
+\f2 \
+\
+			ard\uc0\u305 ndan breeze ile gelen dosyalar\u305 n uygulamam\u305 za kopyalanmas\u305 n\u305  sa\u287 l\u305 yoruz\
+				\
+				
+\f3 php artisan breeze:install
+\f2 \
+\
+			E\uc0\u287 er Tailwind de\u287 il de Bootstrap ile kullanmak istiyorsak, Breeze ile gelen Tailwind 			par\'e7alar\u305 n\u305  Bootstrap'e \'e7evirecek bir paketi kuruyoruz;\
+\
+				
+\f3 composer require nascent-africa/jetstrap --dev
+\f2 \
+\
+			Bu paket bizim i\'e7in breeze ile gelen g\'f6rsel k\uc0\u305 s\u305 m kodlar\u305 n\u305 n i\'e7inden tailwind par\'e7alar\u305 n\u305  			bootstrap ile de\u287 i\u351 tirecek. Bu de\u287 i\u351 tirme i\u351 lemini yapmas\u305  i\'e7in gereken komutu 			\'e7al\u305 \u351 t\u305 r\u305 yoruz:\
+\
+				
+\f3 php artisan jetstrap:swap breeze
+\f2 \
+\
+			B\'f6ylece php taraf\uc0\u305  tamamd\u305 r, buradan sonra \'f6ny\'fcz ba\u287 \u305 ml\u305 l\u305 klar\u305 n\u305  kurup \'e7al\u305 \u351 t\u305 rmak 			i\'e7in\
+\
+				
+\f3 npm install && npm run dev
+\f2 \
+\
+			komutlar\uc0\u305 n\u305  \'e7al\u305 \u351 t\u305 r\u305 yoruz. Uygulamam\u305 zda daha \'f6nce migrationlar\u305  \'e7al\u305 \u351 t\u305 rmad\u305 ysak, 			kullan\u305 c\u305 ya dair veritaban\u305  tablolar\u305 n\u305 n olu\u351 turulmas\u305 n\u305  sa\u287 lamak i\'e7in\
+\
+				
+\f3 php artisan migrate
+\f2 \
+\
+			komutunu \'e7al\uc0\u305 \u351 t\u305 r\u305 yoruz. D\u304 KKAT!!! Breeze kurulum esnas\u305 nda routes/web.php 			dosyas\u305 n\u305 n \'fczerine yazd\u305 \u287 \u305 ndan bu dosyan\u305 n \'f6nceki halindeki kay\u305 tlar kaybolabilir. Bu 			y\'fczden bu i\u351 lemleri Laravel projemizi ilk ba\u351 latt\u305 \u287 \u305 m\u305 zda yaparsak sorun ya\u351 amay\u305 z 			ancak sonradan yap\u305 yorsak rotalar\u305 n bir yede\u287 ini tutmakta fayda olabilir.
+\f0 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+}
