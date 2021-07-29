@@ -49,7 +49,35 @@ Git Versiyon Takip Sistemi \
 \
 - > 	Git versiyon takip sistemini yereldeki dosyalar\uc0\u305 n takibi i\'e7in de kullanabiliriz. Ayr\u305 ca, bu sistemin as\u305 l art\u305 s\u305 , insanlarla projelerimizi payla\u351 mak i\'e7in GitHub \'fczerinden bir repository a\'e7arak buradan da versiyon takibinde olan dosyalar\u305 m\u305 z\u305  payla\u351 abiliriz. Bu sayede projeleri insanlarla ortak y\'fcr\'fctebiliriz. \
 \
-- > 	Kendi yerel depomuzdaki takipli dosyalar\uc0\u305 m\u305 z\u305  sunucu \'fczerindeki uzak depomuza itiyoruz. (Push) \
+- > 	Kendi yerel depomuzdaki takipli dosyalar\uc0\u305 m\u305 z\u305  sunucu \'fczerindeki uzak depomuza itiyoruz. (Push) Bunu yapmak i\'e7in \'f6ncelikle GitHub \'fczerinden bir repository a\'e7mam\u305 z gerekiyor. Sonras\u305 nda versiyon takip sistemi ba\u351 latt\u305 \u287 \u305 m\u305 z yerel dosyam\u305 za girerek; \
+\
+	git remote add origin \'93repository link\'94 \
+\
+- > 	Diyerek yerel ortam\uc0\u305 m\u305 zdaki versiyon takibiyle GitHub \'fczerindeki depomuzu e\u351 liyoruz. Sonras\u305 nda ise; \
+\
+	git push \
+\
+- > 	Diyerek yerel depomuzda commit etti\uc0\u287 imiz t\'fcm dosyalar\u305 m\u305 z\u305  GitHub deposuna yolluyoruz. \
+\
+\
+Peki GitHub \'fczerinde olu\uc0\u351 turulmu\u351  bir projede ortak \'e7al\u305 \u351 may\u305  nas\u305 l y\'fcr\'fct\'fcr\'fcz? Remote git depodan bir projeyi yerelimize \'e7ekerek yapt\u305 \u287 \u305 m\u305 z de\u287 i\u351 iklikleri yetkimiz do\u287 rultusunda remote\'92a commitlemek.  \
+\
+- > 	Remote olu\uc0\u351 turulan depomuzda ba\u351 ka birisine yetki vermek i\'e7in; \
+		\
+		\'97 Settings / Manage Access / Invite a Collaborator\
+ \
+- > 	Bu i\uc0\u351 lemden sonra davet etti\u287 imiz ki\u351 iye bir e-posta gidiyor. Kar\u351 \u305  taraf daveti kabul edince, o taraf\u305 n olu\u351 turmad\u305 \u287 \u305  ba\u351 kas\u305 n\u305 n olu\u351 turdu\u287 u bir depoda ortak \'e7al\u305 \u351 ma yap\u305 labilir. Bunun i\'e7in de collaborator git deposunun linkini kopyalayarak terminalinde \u351 u komutu \'e7al\u305 \u351 t\u305 r\u305 yor; \
+\
+	git clone \'93proje GitHub linki\'94\
+\
+- > 	Collaborator yapt\uc0\u305 \u287 \u305  de\u287 i\u351 iklikleri git add -A komutu ile sahneye al\u305 r, git commit -m \'93Collaborator edit\'94 komutuyla commtiler ve sonras\u305 nda git push diyerek remote depoya yolluyor. \
+\
+\
+ ** 	Peki ayn\uc0\u305  isimde yarat\u305 lan dosyalar\u305 n i\'e7eri\u287 inde bir \'e7ak\u305 \u351 ma olursa ne olur? Collaboratorlar ayn\u305  isimdeki dosyada farkl\u305  i\'e7erikler \'fcretebilirler. Peki bu durumda hangi de\u287 i\u351 iklik ge\'e7erli olacak? Bu tarzda ola\u287 an ak\u305 \u351 \u305 n k\u305 r\u305 ld\u305 \u287 \u305  durumlarda \'93merge conflict\'94 devreye giriyor. \
+\
+	Ancak ayn\uc0\u305  isimdeki dosyan\u305 n ayn\u305  sat\u305 r\u305 ndaki kodlarda olu\u351 an farkl\u305 l\u305 klarda merge conflict yapam\u305 yor. Peki ne oluyor? \
+\
+	Dosyay\uc0\u305  ilk olu\u351 turan\u305 n yapt\u305 \u287 \u305  de\u287 i\u351 iklikler <<<<<< HEAD >>>>> olarak belirtilip ayn\u305  dosya i\'e7erisinde belirtiliyor. Bu tarz conflict durumlar\u305 nda git sistemi bu sorunu collaboratorlarin \'e7\'f6zmesini bekliyor. \
 \
 \
 \
