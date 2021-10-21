@@ -61,7 +61,7 @@ Gelen yanıt sonrası, değiştirmek istediğiniz varsayılan ayarları kendiniz
     $ git config --global user.name "Furkan Meraloğlu"
     $ git config --global user.email furkanmeraloglu@gmail.com
 
-İsmimizi ve e-posta adresimizi Git config dosyasına kaydettikten sonra son olarak varsayılan 'branch' ismi olan 'master' ismini de istediğimiz bir şekilde değiştirebiliriz. Normalde yerel ortamımızda 'master' ismi ile sorunsuz çalışabiliyoruz ancak ilerleyen bölümlerde yerel depomuzu bir uzak depo olan GitHub'a bağlarken GitHub branch ismimizi 'main' olarak değiştirmemizi talep edecek. GitHub'ın neden böyle bir değişiklik istediğini merak edenler olursa bu [yazıyı](https://www.theserverside.com/feature/Why-GitHub-renamed-its-master-branch-to-main) okuyabilirler. Master Branch ismini Main yapmak için aşağıdaki komutu terminalimizde çalıştırıyoruz:
+İsmimizi ve e-posta adresimizi Git config dosyasına kaydettikten sonra son olarak varsayılan 'branch' ismi olan 'master' ismini de istediğimiz bir şekilde değiştirebiliriz. Normalde yerel ortamımızda 'master' ismi ile sorunsuz çalışabiliyoruz ancak ilerleyen bölümlerde yerel depomuzu bir uzak depo olan GitHub'a bağlarken GitHub branch ismimizi `main` olarak değiştirmemizi talep edecek. GitHub'ın neden böyle bir değişiklik istediğini merak edenler olursa bu [yazıyı](https://www.theserverside.com/feature/Why-GitHub-renamed-its-master-branch-to-main) okuyabilirler. `Master` Branch ismini `main` yapmak için aşağıdaki komutu terminalimizde çalıştırıyoruz:
 
     $ git config --global init.defaultBranch main
 
@@ -137,11 +137,68 @@ Versiyon takip sistemi başlattığımız ve değişikliklerimizi commitlediğim
 
     $ git branch {branch_adi}
 
-Oluşturduğumuz branch'ler arası değişim yapmak istediğimizde aşağıdaki komutu çalıştırıyoruz.
+Oluşturduğumuz branch'e geçmek istediğimizde aşağıdaki komutu çalıştırıyoruz.
 
     $ git checkout {branch_adi}
 
+Bir branch oluşturup aynı komut içerisinde yeni oluşturduğunuz branch'e geçmek istiyorsanız aşağıdaki komutu çalıştırabilirsiniz.
 
+    $ git checkout -b {branch_adi}
 
+Peki sonradan oluşturduğumuz branch'in ismini nasıl değiştireceğiz? Aşağıdaki komutu çalıştırdığınız zaman branch isminiz değişecektir. 
 
+    $ git branch --move {eski branch_adi} {yeni branch_adi}
 
+`Main` branch'i haricinde oluşturduğunuz branch'te istediğiniz değişiklikleri yapabilirsiniz. Ancak bu branch'te yaptığınız değişiklikleri sahneye almadan ve commit'lemeden `main` branch'e geçemezsiniz. Değişikliklerinizi commit'ledikten sonra `main` branch'e geçip projenizin ana hattı üzerinde değişiklik yapabilir, hatta yaptığınız değişiklikleri başka bir branch'te depolayabilirsiniz. Bu esneklik size projeniz üzerinde tam hakimiyete sahip olmanızı sağlamakla beraber istediğiniz noktaya dönmenizi sağlar. 
+
+Diyelim ki `main` branch'iniz dışında oluşturduğunuz branch'te yapmak istediğiniz değişiklikleri yaptınız ve bu branch'i `main` branch ile birleştirmek istiyorsunuz. Bunu yapmak için aşağıdaki komut satırlarını çalıştırabilirsiniz.
+
+    $ git checkout main
+    $ git merge {main ile birleştireceğiniz branch_adı}
+
+Gördüğünüz gibi öncelikle `main` branch'e geçtik ve sonradan oluşturduğumuz branch'i `main`ile birleştirdik. Oluşturduğunuz branch'leri `main` ile birleştirdikten sonra isterseniz silebilirsiniz. Branch'i silmek için ise aşağıdaki komutu kullanabilirsiniz.
+
+    $ git branch -d {branch_adi}
+
+Peki merge işlemi yapmak istiyoruz ama birleştirmek istediğimiz branch `main` branch'imizin önünde yer alıyor. Bu durumda Git bize bir `conflict` uyarısı gösterecektir. Bu `conflict` uyarısı size ortaya çıkan çakışmayı çözdükten sonra `merge` etmenizi söyleyecek. Peki bu çakışma durumunu nasıl düzelteceğiz? Çakışma olan belgeyi incelediğimizde Git'in belge içinde çakışma olan kısmı `<<<<<<<`, `=======`, `>>>>>>>` işaretleri ile gösterdiğini fark edeceksiniz. Bu çakışmayı çözmeniz için çakışan kısımları düzeltmeniz ve sonrasında branch'lerinizi birleştirmeniz yeterli. Birleştirdiğiniz yani `merge` ettiğiniz branch'leri görüntülemek istiyorsanız; 
+
+    $ git branch --merged
+
+ya da `merge` edilmemiş branch'leri görüntülemek istiyorsanız aşağıdaki komutları çalıştırabilirsiniz.
+
+    $ git branch --no-merged
+
+Ayrıca, Git, dökümanlarında `merge` komutunun dışında aynı zamanda `rebase` komutunu da kullanılabileceğimizi belirtiyor. Bu bağlamda birleştirmek istediğimiz branch'leri `rebase` komutu kullanarak aşağıdaki gibi birleştirebiliriz.
+
+    $ git rebase {birleştirilmek istenen branch_adı}
+
+<h3 style="color:#B1D8B7"> GitHub Kullanımı </h3>
+
+İşletim sisteminizde Git kurulumu yaptıktan sonra yukarıda yaptığımız tüm işlemleri yerel ortamınızda gerçekleştirebilir ve dosyalarınızda versiyon takip sistemini kullanabilirsiniz. Peki takım halinde bir proje üzerinde çalıştığımızı düşünelim ya da yerel ortamda ürettiğimiz projeyi açık kaynak olarak başkalarının kullanımına açmak istediğimizi düşünelim. GitHub sunucularında oluşturacağımız `remote repository` tüm bu isteklerimizi karşılayacak. Öncelikle bir GitHub profiline sahip olmanız gerekiyor. [Buraya](https://github.com/) tıklayarak ücretsiz bir şekilde kayıt olabilir, projelerinizi paylaşabilir, takım arkadaşlarınızla ortak çalıştığınız projeler üzerinde işbirliği yapabilir veya farklı meslek gruplarından ve ilgi alanlarından olan birçok kişinin projelerini inceleyebilirsiniz. 
+
+GitHub'da profilinizi oluşturduktan sonra `repositories` kısmına gelerek yeni bir depo oluşturabilirsiniz. Oluşturacağınız bu deponun başkaları tarafından erişilebilir olup olmayacağına karar verebilir ve isterseniz projeniz için bir açıklama yazısı yani `Readme.md` yazabilirsiniz. GitHub'daki deponuzu oluşturduktan sonra eğer yerel ortamınızda halihazırda var olan bir Git deposunu buraya aktarmak istiyorsanız aşağıdaki komutları yerel ortamınızdaki proje dizininden çalıştırabilirsiniz.
+
+    $ git remote add origin https://github.com/furkanmeraloglu/test.git
+    $ git branch -M main
+    $ git push -u origin main
+
+Yerel ortamınızdan GitHub deponuza aktaracağınız projede eğer versiyon takip sistemi başlatmamışsanız aşağıdaki komutları çalıştırabilirsiniz.
+
+    $ echo "# test" >> README.md
+    $ git init
+    $ git add README.md
+    $ git commit -m "first commit"
+    $ git remote add origin https://github.com/furkanmeraloglu/test.git
+    $ git push -u origin main
+
+Bu aşamalardan sonra yerel ortamınızda sahip olduğunuz projeniz GitHub deponuzda da saklanmaya başlayacak. Peki yerel ortamınızda kullandığınız versiyon takip sistemi ile GitHub'daki deponuz arasında nasıl bağlantı kuracağız? Yerel ortamdaki değişiklikleri nasıl GitHub'a da göndereceğiz? Aslında bu sorunun cevabu yukarıda gizli. Yerelde commit'lediğimiz her değişikliği, yerel deponun bağlı bulunduğu `remote repository`'e `git push` komutu ile yollayabiliyoruz.
+
+Peki bir takım arkadaşımız ortak projemize katkıda bulunmamız için bizi kendi GitHub deposunda `collaborator` olarak tanımladı. Biz bu depodaki proje dosyalarını kendi yerel ortamımıza alıp versiyon takibini nasıl sağlayacağız? Aşağıdaki komutu çalıştırarak GitHub deposunda yer alan bir projeyi yerel ortamınıza kolayca çekebilirsiniz.
+
+    $ git clone git@github.com:furkanmeraloglu/test.git
+
+Projeyi yerel ortamınıza aldıktan sonra bu rehberde ihtiyaçlarınızı karşılayacak tüm işlemleri gerçekleştirebilirsiniz.
+
+<h3 style="color:#B1D8B7"> Sonuç </h3>
+
+Evet, kapsamlı bir rehberin sonuna geldik. Bu rehber yardımıyla, versiyon takip sisteminin ne olduğu, neden böyle bir sisteme ihtiyacımız olduğu, ve bu sistemler arasında en yaygın biçimde kullanılan Git ve GitHub'ın nasıl kullanılacağı hakkında bilgi sahibi olmuş olduk. Temel fonksiyonlarına değindiğimiz Git hakkında daha detaylı bir dökümana ihtiyacınız var ise bu [bağlantıdan](https://git-scm.com/book/en/v2) Git'in detaylı rehber kitabına ulaşabilirsiniz. 
