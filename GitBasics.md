@@ -137,6 +137,11 @@ Versiyon takip sistemi başlattığımız ve değişikliklerimizi commitlediğim
 
     $ git branch {branch_adi}
 
+Oluşturduğumuz branch'ler arası değişim yapmak istediğimizde aşağıdaki komutu çalıştırıyoruz.
+
+    $ git checkout {branch_adi}
+
+
 
 
 
